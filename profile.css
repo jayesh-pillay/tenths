@@ -378,3 +378,22 @@ input:checked + .slider:before {
 .btn-danger-outline:hover {
     background: #FFF1F1;
 }
+
+@media (max-width: 768px) {
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .prof-info-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding-left: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+    .prof-header h1 {
+        font-size: 2.2rem;
+    }
+}

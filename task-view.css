@@ -475,3 +475,31 @@
 .sunburst-slice:hover {
     filter: brightness(1.05);
 }
+
+@media (max-width: 992px) {
+    .tv-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .tv-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .tv-title {
+        font-size: 2.2rem;
+    }
+    
+    .tv-badges {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .overall-progress-text {
+        text-align: left;
+    }
+}

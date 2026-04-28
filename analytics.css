@@ -329,3 +329,24 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 768px) {
+    .an-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .an-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    .an-title {
+        font-size: 2.2rem;
+    }
+    .an-time-pills {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    .time-pill {
+        white-space: nowrap;
+    }
+}
