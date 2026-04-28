@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS task_breakdowns (
     task_id INT NOT NULL,
     step_index INT NOT NULL,
     title VARCHAR(255) NOT NULL,
+    min_target_val VARCHAR(100) DEFAULT NULL,
     target_val VARCHAR(100) NOT NULL,
     current_val INT DEFAULT 0,
     status ENUM('pending', 'completed') DEFAULT 'pending',
