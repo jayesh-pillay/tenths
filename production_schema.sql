@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
     notif_email_summary BOOLEAN DEFAULT TRUE,
     notif_push BOOLEAN DEFAULT TRUE,
     notif_tips BOOLEAN DEFAULT FALSE,
+    reset_token VARCHAR(64) DEFAULT NULL,
+    reset_expires DATETIME DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
