@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 // TENTH'S CLOUD FORGE
 // This script automatically reads your production_schema.sql 
 // and builds all your tables in the cloud database with one click.

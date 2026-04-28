@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 // Prevent date() functions from throwing HTML Warnings on local MacOS servers
 date_default_timezone_set('UTC');
 
@@ -45,8 +42,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    $errorDetails = "Database connection failed! Real error: " . $e->getMessage() . " | Host set to: " . $host . " | Database set to: " . $db;
-    echo json_encode(["status" => "error", "message" => $errorDetails]);
+    echo json_encode(["status" => "error", "message" => "Database connection failed!"]);
     exit;
 }
 ?>
