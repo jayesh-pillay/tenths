@@ -1,0 +1,512 @@
+:root {
+    /* Colors */
+    --bg-main: #FAFAF8;
+    --bg-gradient: radial-gradient(circle at top left, #FFFFFF 0%, #F5F4F0 100%);
+    --bg-card: #FFFFFF;
+    --bg-feature: #F6F5F2;
+    --bg-input: #F3F1EC;
+    --bg-footer: #E1DFD9;
+    
+    --text-primary: #1C1918;
+    --text-secondary: #5E5A58;
+    --text-placeholder: #8C8885;
+    
+    --accent-brown: #795A54;
+    --accent-brown-hover: #634842;
+    --accent-light: #A1837B;
+    
+    /* Variables */
+    --font-main: 'Outfit', sans-serif;
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 24px;
+    
+    --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Typography Utility Classes */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Page Layout */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 5%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header snapped to grid for perfect vertical alignment with main content */
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 1rem 0 4rem;
+}
+
+.logo {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent-brown);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* PERFECT VERTICAL STACK CENTER */
+    gap: 2rem;
+    max-width: 450px; /* MATCH THE CARD EXACTLY */
+    margin: 0 auto; /* CENTER WITHIN GRID COLUMN */
+    width: 100%;
+}
+
+.login-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-brown);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-brown-hover);
+    transform: translateY(-1px);
+}
+
+.btn-login {
+    padding: 0.8rem 2.2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-google {
+    width: 100%;
+    background-color: var(--bg-feature);
+    color: var(--text-primary);
+    gap: 0.75rem;
+}
+
+.btn-google:hover {
+    background-color: #EBE9E2;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Main Content Dual Grid */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+
+/* Left Side - Hero Content */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.highlight {
+    color: var(--accent-light);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 90%;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.feature-card {
+    background-color: var(--bg-feature);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-md);
+    transition: transform 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.feature-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Right Side - Form Card */
+.form-section {
+    display: flex;
+    justify-content: center; /* Center the card to match header-right's centering */
+}
+
+.signup-card {
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: 450px;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+input {
+    background-color: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+input::placeholder {
+    color: var(--text-placeholder);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-light);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(161, 131, 123, 0.1);
+}
+
+/* Password Strength Meter */
+.strength-meter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.strength-bar-bg {
+    height: 4px;
+    background-color: #E0E0E0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-bar-fill {
+    height: 100%;
+    width: 75%; /* Hardcoded initial value for visual matching */
+    background-color: var(--accent-brown); /* "Strong" state shown in the image */
+    border-radius: 2px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-text {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-brown);
+    letter-spacing: 0.5px;
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--text-placeholder);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #EAE8E3;
+}
+
+.divider span {
+    padding: 0 10px;
+}
+
+/* Footer structure */
+/* Thinner, Modern Footer */
+.footer {
+    background-color: var(--bg-footer);
+    padding: 2.5rem 5%; /* Significantly thinner vertical padding */
+    margin-top: auto;
+    border-top: 1px solid rgba(0,0,0,0.03);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    flex: 2;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-brown);
+}
+
+.footer-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem; /* Slightly smaller for elegance */
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+.footer-copy {
+    color: var(--text-placeholder);
+    font-size: 0.8rem;
+    margin-top: 1rem; /* Tighter spacing */
+}
+
+.footer-links {
+    flex: 1;
+}
+
+.link-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.link-column h4, .footer-newsletter h4 {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.link-column a {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.link-column a:hover {
+    color: var(--accent-brown);
+}
+
+.footer-newsletter {
+    flex: 1.5;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.newsletter-form {
+    position: relative;
+    display: flex;
+    gap: 0;
+}
+
+.newsletter-form input {
+    width: 100%;
+    padding-right: 3rem;
+    background-color: #FAFAFA;
+    border-radius: var(--border-radius-lg);
+}
+
+.newsletter-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent-light);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.newsletter-btn:hover {
+    background-color: var(--accent-brown);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    border-radius: 50%;
+}
+
+.social-icon:hover {
+    color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .hero-section {
+        display: none;
+    }
+
+    .main-content {
+        display: flex;
+        justify-content: center;
+        padding-top: 2rem;
+    }
+    
+    .form-section {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .signup-card {
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .header-right {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .signup-card {
+        padding: 2rem 1.5rem;
+    }
+}

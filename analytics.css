@@ -1,0 +1,331 @@
+/* analytics.css */
+
+.analytics-main {
+    padding-top: 50px;
+}
+
+.an-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.an-subtitle {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.an-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111;
+    letter-spacing: -0.01em;
+}
+
+.an-header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.an-btn-light {
+    background: #F4F3F0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+}
+
+.an-btn-dark {
+    background: #6C5248;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.an-time-pills {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.time-pill {
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: #F4F3F0;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.time-pill:hover {
+    background: #EBEBEB;
+}
+
+.time-pill.active {
+    background: #FFF;
+    color: #111;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* 6 Metrics Grid (3x2) */
+.an-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.an-metric-card {
+    background: #FBFBFA;
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.an-m-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.an-m-val {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #222;
+    line-height: 1;
+}
+
+/* Charts Grid */
+.an-charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.an-chart-card {
+    background: #FFF;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.an-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 30px;
+}
+
+/* Trend SVG wrapper */
+.svg-trend-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin-bottom: 10px;
+}
+
+.hline {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #F0F0F0;
+}
+
+.an-trend-x-axis {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #AAA;
+    letter-spacing: 0.05em;
+}
+
+/* Donut Graph */
+.donut-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px auto;
+}
+
+.conic-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #EEE; /* Default before JS */
+    transition: background 1s ease-out;
+}
+
+.donut-hole {
+    position: absolute;
+    width: 65%;
+    height: 65%;
+    background: #FFF;
+    border-radius: 50%;
+    top: 17.5%;
+    left: 17.5%;
+}
+
+.donut-legend {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.d-leg-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.1em;
+}
+
+.d-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* High Impact Section */
+.an-impact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+.an-impact-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.an-link {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.an-link:hover { color: #111; }
+
+.an-impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.impact-card {
+    background: #FFF;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+    position: relative;
+}
+
+.impact-badge {
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: #D34545;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.impact-badge.in-progress {
+    color: #8C7B73;
+}
+
+.ic-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 25px;
+}
+
+.ic-arrow {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: #CCC;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.impact-card:hover .ic-arrow {
+    color: #111;
+    transform: translate(2px, -2px);
+}
+
+.ic-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ic-prog-lbl {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #AAA;
+}
+
+.ic-prog-pct {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #775A50;
+}
+
+.ic-track {
+    width: 100%;
+    height: 8px;
+    background: #EAEAEA;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ic-fill {
+    height: 100%;
+    background: #775A50;
+    border-radius: 4px;
+}
+
+/* Responsive constraints */
+@media (max-width: 1100px) {
+    .an-metrics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .an-charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .an-impact-grid {
+        grid-template-columns: 1fr;
+    }
+}

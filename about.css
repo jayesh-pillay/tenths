@@ -1,0 +1,404 @@
+/* about.css */
+
+.about-main {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Base Typographic Resets for About Space */
+.ab-section {
+    width: 100%;
+}
+
+.ab-overline {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.ab-heading {
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: #775A50;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 25px;
+}
+
+.ab-heading-small {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #775A50;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 15px;
+}
+
+.ab-subheading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #775A50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #EBEAE4;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.ab-paragraph {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.mt-100 { margin-top: 100px; }
+.mt-30 { margin-top: 30px; }
+.mt-20 { margin-top: 20px; }
+.pb-20 { padding-bottom: 20px; }
+
+/* 1. Hero Grid */
+.ab-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ab-hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+}
+
+/* 2. Features Grid (3 Columns) */
+.ab-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.ab-feature-card {
+    background: #FFF;
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+}
+
+.ab-feat-icon {
+    width: 24px;
+    height: 24px;
+    color: #775A50;
+    margin-bottom: 20px;
+}
+
+.ab-feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.ab-feature-card p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 3. Workflow Split */
+.ab-workflow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+}
+
+.ab-wf-image {
+    margin-top: 40px;
+    width: 100%;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.ab-wf-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ab-wf-right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 20px;
+}
+
+.ab-step {
+    display: flex;
+    gap: 25px;
+}
+
+.step-num {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #E2DCD5;
+    line-height: 0.8;
+}
+
+.step-content h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.step-content p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 4. Feedback Form Layout */
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.ab-form-container {
+    background: #FFFFFF;
+    border-radius: 30px;
+    padding: 50px;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+
+.ab-form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.ab-form-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #775A50;
+    margin-bottom: 10px;
+}
+
+.ab-form-header p {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.ab-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.ab-form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.ab-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.ab-group label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.ab-group input, 
+.ab-group textarea, 
+.ab-group select {
+    background: #F8F8F8;
+    border: 1px solid transparent;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    font-family: inherit;
+    transition: all 0.2s;
+    appearance: none;
+}
+
+.ab-group input:focus, 
+.ab-group textarea:focus, 
+.ab-group select:focus {
+    outline: none;
+    background: #FFF;
+    border-color: #DDD;
+}
+
+.ab-select-wrapper {
+    position: relative;
+}
+
+.ab-select-wrapper::after {
+    content: "▼";
+    font-size: 0.6rem;
+    color: #888;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.ab-btn-submit {
+    background: #775A50;
+    color: #FFF;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.ab-btn-submit:hover {
+    background: #5E463E;
+    transform: translateY(-2px);
+}
+
+/* 5. Bio Grid */
+.ab-bio-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.ab-bio-img {
+    width: 100%;
+    height: 450px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.ab-bio-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ab-bio-role {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #888;
+}
+
+.ab-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ab-chips span {
+    background: #EAE6E4; /* Slightly greyed */
+    color: #555;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.ab-contact-block {
+    border-top: 1px solid #EBEAE4;
+    padding-top: 20px;
+}
+
+.ab-contact-block p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.ab-contact-block a {
+    color: #775A50;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* App Footer */
+.app-footer {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-top: 1px solid #EAE8E3;
+}
+
+.app-footer h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #775A50;
+    margin-bottom: 15px;
+}
+
+.app-footer p {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.app-footer h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 15px;
+    letter-spacing: 0.05em;
+}
+
+.app-footer a {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.app-footer a:hover {
+    color: #775A50;
+}
+
+/* Responsive Scaling down for tablets / smaller desktops */
+@media (max-width: 1024px) {
+    .ab-hero-grid, .ab-workflow-grid, .ab-bio-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .ab-features-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .ab-features-grid {
+        grid-template-columns: 1fr;
+    }
+    .ab-form-row {
+        flex-direction: column;
+    }
+    .app-footer {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Tenth's</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Base App CSS Files -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    
+    <!-- Dedicated Layout CSS -->
+    <style>
+        :root {
+            --accent-color: var(--accent-brown, #795A54);
+            --accent-hover: var(--accent-brown-hover, #634842);
+            --bg-primary: var(--bg-card, #FFFFFF);
+            --bg-secondary: var(--bg-feature, #F6F5F2);
+            --border-color: #EAE8E3;
+        }
+        
+        /* Help Page Specific Styles using master Tenth's theme variables */
+        .help-main {
+            padding: 60px 40px;
+            background: var(--bg-primary); /* #FAF6F0 */
+        }
+
+        .help-hero {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .help-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .help-hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .help-section {
+            margin-bottom: 80px;
+            background: var(--bg-primary);
+        }
+
+        .help-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* FAQ Container */
+        .faq-container {
+            display: grid;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--bg-secondary); /* #FFF */
+            border-left: 3px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .faq-question {
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .faq-toggle {
+            display: inline-block;
+            transition: transform 0.3s;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 18px 16px 18px;
+        }
+
+        /* How-To Guides */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .guide-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .guide-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .guide-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .guide-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .guide-btn {
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .guide-card:hover .guide-btn {
+            transform: translateX(4px);
+        }
+
+        /* Troubleshooting */
+        .troubleshoot-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .troubleshoot-item {
+            background: var(--bg-secondary);
+            border-left: 4px solid #d85a30;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .troubleshoot-item.sync-issue {
+            border-left-color: #4a7b9d;
+        }
+
+        .troubleshoot-item h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .troubleshoot-item p.problem {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .troubleshoot-solution {
+            background: var(--bg-primary);
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .troubleshoot-solution strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .troubleshoot-solution ol {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .troubleshoot-solution li {
+            margin-bottom: 6px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        /* Support Form Styles */
+        .support-form {
+            background: var(--bg-primary);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 30px;
+        }
+
+        .support-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .support-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .support-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .support-group input,
+        .support-group textarea {
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .support-group input:focus,
+        .support-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(108, 82, 72, 0.1);
+        }
+
+        .support-group textarea {
+            resize: vertical;
+        }
+
+        /* Support Type Selector */
+        .support-type-selector {
+            display: grid;
+            gap: 12px;
+        }
+
+        .support-radio {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .support-radio:hover {
+            border-color: var(--accent-color);
+            background: var(--bg-primary);
+        }
+
+        .support-radio input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .support-radio input[type="radio"]:checked + .radio-label {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .radio-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .radio-info {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .support-btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .support-btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 82, 72, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .help-main {
+                padding: 40px 20px;
+            }
+            .support-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Guide Content Styles */
+        .guide-content {
+            margin-top: 30px;
+            padding: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .guide-detail h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-detail h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .guide-detail ol, .guide-detail ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+        
+        .guide-detail li {
+            margin-bottom: 8px;
+        }
+        
+        .guide-detail strong {
+            color: var(--text-primary);
+        }
+
+        .mt-100 {
+            margin-top: 100px;
+        }
+        
+        /* Footer styling specific */
+        .footer-left h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .footer-left p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-text">Tenth's</div>
+            </div>
+
+            <div class="user-profile">
+                <!-- Fallback info until JS loads -->
+                <div class="avatar" id="nav-avatar">J</div>
+                <div class="user-info">
+                    <span class="user-name" id="nav-name">jayeshpillay</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    Home
+                </a>
+                <a href="tasks.html" class="nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    Tasks
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    Analytics
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Profile
+                </a>
+            </nav>
+
+            <button onclick="window.location.href='create-task.html'" class="btn btn-primary btn-new-task">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                New Task
+            </button>
+
+            <div class="sidebar-bottom">
+                <a href="help.html" class="nav-sub-item active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Help</a>
+                <a href="#" id="logout-btn" class="nav-sub-item logout"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Help Content -->
+        <main class="dashboard-main help-main" style="padding-top: 40px; overflow-y: auto; height: 100vh;">
+            
+            <section class="help-hero">
+                <h1>Help Center & Privacy</h1>
+                <p>Everything you need to know about Tenth's. Browse our guides or contact support below.</p>
+            </section>
+
+            <!-- FAQ SECTION ALL RESTORED EXACTLY -->
+            <section class="help-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I create my first task?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <strong>Step-by-step:</strong>
+                            <ol>
+                                <li>Tap "+ New Task" in the sidebar</li>
+                                <li>Enter your task title (e.g., "Complete Chapter 5")</li>
+                                <li>Add a description with specific details</li>
+                                <li>Choose your measuring metric (chapters, hours, pages)</li>
+                                <li>Set a deadline</li>
+                                <li>Tap "Create Task"</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What's a "measuring metric"?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            A measuring metric is what you're tracking progress by. Common examples include:
+                            <ul>
+                                <li><strong>Chapters</strong> - for reading or studying</li>
+                                <li><strong>Hours</strong> - for work or exercise</li>
+                                <li><strong>Pages</strong> - for writing or document completion</li>
+                                <li><strong>Units</strong> - for any custom measurement</li>
+                                <li><strong>Items</strong> - for checklists</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I add progress to a task?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <strong>Method 1:</strong>
+                            <ol>
+                                <li>Go to your Dashboard</li>
+                                <li>Find the task or spending category</li>
+                                <li>Tap the "+val" input box</li>
+                                <li>Enter how many units you completed</li>
+                                <li>Tap "Add Progress"</li>
+                            </ol>
+                            <strong>Tip:</strong> If you accidentally enter too much, our system auto-caps it to your target!
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I edit a task after creating it?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! You can edit most task details:
+                            <ul>
+                                <li>Tap the task to open it</li>
+                                <li>Tap the edit icon (pencil)</li>
+                                <li>Modify: title, description, target, or deadline</li>
+                                <li>Tap "Save"</li>
+                            </ul>
+                            <strong>Note:</strong> You cannot change the measuring metric type after creation.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I delete a task?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <ol>
+                                <li>Open the task</li>
+                                <li>Tap the trash/delete icon</li>
+                                <li>Confirm deletion</li>
+                            </ol>
+                            <strong>Warning:</strong> This is permanent and cannot be undone. Consider archiving instead!
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What does "On Track" vs "Needs Attention" mean?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Our system automatically analyzes your progress against your deadline. If you are falling behind the required daily average to hit your deadline, we flag it as "Needs Attention" so you stay accountable!
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I change my password?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Head over to the Profile section from your sidebar, scroll down to Security Settings, and hit "Change Password".
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is my data encrypted?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! All your data is securely stored and protected with AES-256 encryption. Your privacy is our absolute priority and your data is never shared.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I export my data?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Data exports (CSV formatting) are currently being developed and will be available in the next major update out of the Profile dashboard!
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What happens if I delete my account?</span>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            When you delete your account through your Profile settings, all task records, analytics, and personal information are permanently scrubbed from our systems. This action is irreversible.
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- TROUBLESHOOTING RESTORED -->
+            <section class="help-section">
+                <h2>Troubleshooting</h2>
+                
+                <div class="troubleshoot-grid">
+                    <div class="troubleshoot-item">
+                        <h3>❌ App Crashes Frequently</h3>
+                        <p class="problem">Problem: Tenths keeps crashing when I open it.</p>
+                        <div class="troubleshoot-solution">
+                            <strong>Solutions:</strong>
+                            <ol>
+                                <li>Force close the app (Settings → Apps → Tenths → Force Stop)</li>
+                                <li>Clear app cache (Settings → Apps → Tenths → Storage → Clear Cache)</li>
+                                <li>Restart your phone</li>
+                                <li>Reopen Tenths</li>
+                                <li>If still crashing, uninstall and reinstall the app</li>
+                            </ol>
+                            If the problem persists, email support@tenths.app
+                        </div>
+                    </div>
+                    
+                    <div class="troubleshoot-item sync-issue">
+                        <h3>🔄 Data Not Syncing</h3>
+                        <p class="problem">Problem: My progress updates aren't saving or syncing across devices.</p>
+                        <div class="troubleshoot-solution">
+                            <strong>Solutions:</strong>
+                            <ol>
+                                <li>Check your internet connection (WiFi or mobile data)</li>
+                                <li>Sign out → Sign back in</li>
+                                <li>Force close and reopen the app</li>
+                                <li>Check if you're on the latest app version</li>
+                                <li>Try again in a few minutes (server may be syncing)</li>
+                            </ol>
+                            Still not working? Contact support@tenths.app
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- GUIDES SECTION ALL RESTORED EXACTLY -->
+            <section class="help-section">
+                <h2>How-To Guides</h2>
+                
+                <div class="guide-grid">
+                    <div class="guide-card" onclick="toggleGuide(1)">
+                        <h3>📋 Getting Started with Tenths</h3>
+                        <p>Learn the basics: account setup, creating your first task, and understanding the dashboard.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+
+                    <div class="guide-card" onclick="toggleGuide(2)">
+                        <h3>📊 Mastering Analytics</h3>
+                        <p>Deep dive into progress tracking, identifying patterns, and optimizing your workflow.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+                    
+                    <div class="guide-card" onclick="toggleGuide(3)">
+                        <h3>⏰ Time Management Tips</h3>
+                        <p>Best practices for setting realistic targets, meeting deadlines, and building consistency.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+                    
+                    <div class="guide-card" onclick="toggleGuide(4)">
+                        <h3>🎯 Building Your First Week</h3>
+                        <p>Step-by-step guide to planning and executing your first productive week with Tenths.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+                    
+                    <div class="guide-card" onclick="toggleGuide(5)">
+                        <h3>📈 Advanced Progress Tracking</h3>
+                        <p>Leverage advanced features like categories, tags, and custom metrics for power users.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+
+                    <div class="guide-card" onclick="toggleGuide(6)">
+                        <h3>🔒 Privacy & Security Settings</h3>
+                        <p>Understand how to protect your account, manage permissions, and keep your data safe.</p>
+                        <a class="guide-btn">Read Guide →</a>
+                    </div>
+                </div>
+
+                <!-- Guide Content Sections -->
+                <div id="guide-1" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>📋 Getting Started with Tenths</h3>
+                        <p style="margin-bottom: 20px;">Welcome to Tenth's! This guide walks you through the essential setup and first steps to get you productive in minutes.</p>
+                        
+                        <h4>1. Understanding the Dashboard</h4>
+                        <p style="margin-bottom: 10px;">Your dashboard shows:</p>
+                        <ul>
+                            <li><strong>Welcome Banner:</strong> Personalized greeting and motivational message</li>
+                            <li><strong>Quick Stats:</strong> Total tasks, completion rate, tasks due soon</li>
+                            <li><strong>In Progress Section:</strong> Your active tasks with current progress</li>
+                            <li><strong>Upcoming Deadlines:</strong> Tasks due in the next 7 days</li>
+                        </ul>
+
+                        <h4>2. Creating Your First Task</h4>
+                        <ol>
+                            <li>Tap "+ New Task" button</li>
+                            <li>Enter a clear, specific title (e.g., "Complete Chemistry Chapters 1-3")</li>
+                            <li>Add optional description with more details</li>
+                            <li>Choose your measuring metric (chapters, hours, pages, units)</li>
+                            <li>Set your target number (how many chapters, pages, etc.)</li>
+                            <li>Select a deadline</li>
+                            <li>Tap "Create Task"</li>
+                        </ol>
+
+                        <button onclick="toggleGuide(1)" style="margin-top: 20px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+                
+                <div id="guide-2" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>📊 Mastering Analytics</h3>
+                        <p style="margin-bottom: 20px;">Analytics is where you see patterns in your productivity. Learn to use data to improve your performance.</p>
+                        
+                        <h4>1. Understanding Your Metrics</h4>
+                        <ul>
+                            <li><strong>Overall Progress:</strong> Average completion % across all active tasks</li>
+                            <li><strong>On Time Rate:</strong> % of tasks completed by deadline</li>
+                            <li><strong>Average Days to Complete:</strong> How long tasks typically take you</li>
+                            <li><strong>Completion Velocity:</strong> How fast you're progressing (units per day)</li>
+                        </ul>
+                        
+                        <h4>2. Using the Charts</h4>
+                        <p style="margin-bottom: 10px;">Analytics includes:</p>
+                        <ul>
+                            <li><strong>Completion Trend:</strong> Line chart showing your progress over time</li>
+                            <li><strong>Category Breakdown:</strong> Pie chart of which categories consume your time</li>
+                            <li><strong>Status Distribution:</strong> How many tasks are on-track vs behind</li>
+                            <li><strong>Weekly Summary:</strong> Your productivity by day of week</li>
+                        </ul>
+
+                        <h4>3. Identifying Patterns</h4>
+                        <p style="margin-bottom: 10px;">Ask yourself:</p>
+                        <ul>
+                            <li>Which time of day am I most productive?</li>
+                            <li>Which task categories do I procrastinate on?</li>
+                            <li>Are my targets realistic or too ambitious?</li>
+                            <li>What day of the week do I perform best?</li>
+                            <li>How much time do I actually have vs. what I'm committing to?</li>
+                        </ul>
+                        
+                        <h4>4. Taking Action</h4>
+                        <ol>
+                            <li>Review your analytics weekly</li>
+                            <li>Identify 1-2 areas for improvement</li>
+                            <li>Adjust your targets for next week</li>
+                            <li>Schedule work during your peak hours</li>
+                            <li>Break down procrastination-prone tasks smaller</li>
+                        </ol>
+                        
+                        <div style="background: var(--bg-primary); border-left: 4px solid var(--accent-color); padding: 20px; border-radius: 6px; margin-top: 25px; margin-bottom: 25px;">
+                            <strong style="color: var(--text-primary); font-size: 1.05rem;">Pro Tip:</strong> <span style="color: var(--text-secondary);">Weekly analytics reviews (Sunday evening) are the key to continuous improvement!</span>
+                        </div>
+
+                        <button onclick="toggleGuide(2)" style="margin-top: 5px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+                
+                <div id="guide-3" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>⏰ Time Management Tips</h3>
+                        <p style="margin-bottom: 20px;">Master the art of productivity with these proven time management strategies.</p>
+                        
+                        <h4>1. Setting Realistic Targets</h4>
+                        <p style="margin-bottom: 10px;">The #1 mistake: over-committing. Be honest about:</p>
+                        <ul>
+                            <li>How many hours you actually have per day</li>
+                            <li>How long similar tasks have taken in the past</li>
+                            <li>Your energy levels throughout the day</li>
+                            <li>Unexpected interruptions and breaks</li>
+                        </ul>
+                        <p style="margin-top: 15px; color: var(--text-secondary);"><strong>Formula:</strong> (Available Hours × 0.75) ÷ Task Difficulty = Realistic Tasks per Day</p>
+                        
+                        <h4>2. The Power of Deadlines</h4>
+                        <ul>
+                            <li>Set specific deadlines (not just "finish eventually")</li>
+                            <li>Work backwards from your deadline</li>
+                            <li>Break big tasks into smaller milestones</li>
+                            <li>Create a sense of urgency</li>
+                        </ul>
+                        
+                        <h4>3. Building Consistency</h4>
+                        <ol>
+                            <li>Track daily (even if just 5 minutes)</li>
+                            <li>Celebrate small wins</li>
+                            <li>Build a streak (consistency matters more than perfection)</li>
+                            <li>Schedule work at the same time each day</li>
+                            <li>Remove distractions during work sessions</li>
+                        </ol>
+                        
+                        <h4>4. The 80/20 Rule</h4>
+                        <p style="margin-bottom: 10px;">Focus on the 20% of tasks that drive 80% of results. Ask yourself:</p>
+                        <ul>
+                            <li>Which tasks have the most impact?</li>
+                            <li>Which will be noticed/rewarded?</li>
+                            <li>Which align with my long-term goals?</li>
+                            <li>Prioritize these first, then handle the rest</li>
+                        </ul>
+                        
+                        <div style="background: var(--bg-primary); border-left: 4px solid var(--accent-color); padding: 20px; border-radius: 6px; margin-top: 25px; margin-bottom: 25px;">
+                            <strong style="color: var(--text-primary); font-size: 1.05rem;">Golden Rule:</strong> <span style="color: var(--text-secondary);">Under-promise, over-deliver. It's better to finish early and build momentum than to miss deadlines.</span>
+                        </div>
+
+                        <button onclick="toggleGuide(3)" style="margin-top: 5px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+                
+                <div id="guide-4" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>🎯 Building Your First Week</h3>
+                        <p style="margin-bottom: 20px;">A step-by-step framework for your first week of productive work with Tenths.</p>
+                        
+                        <h4 style="margin-top: 10px;">Sunday Evening: Planning (30 mins)</h4>
+                        <ol>
+                            <li>Identify 3-5 main goals for the week</li>
+                            <li>Break each into measurable milestones</li>
+                            <li>Be specific: "Complete 5 chapters" not "Study"</li>
+                            <li>Set realistic deadlines (spread across the week)</li>
+                            <li>Create tasks in Tenths</li>
+                        </ol>
+                        
+                        <h4>Daily: Execution & Tracking (5 mins)</h4>
+                        <ol>
+                            <li>Morning: Check dashboard for today's priorities</li>
+                            <li>Throughout day: Update progress as you complete work</li>
+                            <li>Evening: Log final progress for the day</li>
+                            <li>Celebrate completed tasks!</li>
+                        </ol>
+                        
+                        <h4>Wednesday: Mid-Week Check-In (10 mins)</h4>
+                        <ul>
+                            <li>Are you on track?</li>
+                            <li>If behind: adjust targets or add buffer time</li>
+                            <li>If ahead: bonus! Celebrate momentum</li>
+                            <li>Any tasks that are taking longer than expected?</li>
+                        </ul>
+                        
+                        <h4>Friday: Wrap-Up (15 mins)</h4>
+                        <ol>
+                            <li>Finish as many tasks as possible</li>
+                            <li>Mark completed tasks</li>
+                            <li>Review what you accomplished (feels amazing!)</li>
+                            <li>Note any unfinished tasks for next week</li>
+                        </ol>
+                        
+                        <h4>Sunday: Review & Adjust (20 mins)</h4>
+                        <ol>
+                            <li>Check your analytics from the week</li>
+                            <li>Did you hit your goals?</li>
+                            <li>What went well? What was hard?</li>
+                            <li>Adjust targets for next week based on learnings</li>
+                            <li>Start again with the weekly plan</li>
+                        </ol>
+                        
+                        <h4>Week 1 Metrics to Track</h4>
+                        <ul>
+                            <li>How many tasks did you complete? (target: 80%+)</li>
+                            <li>What was your average completion time?</li>
+                            <li>Which time of day were you most productive?</li>
+                            <li>What tasks did you avoid or procrastinate?</li>
+                        </ul>
+                        
+                        <div style="background: var(--bg-primary); border-left: 4px solid var(--accent-color); padding: 20px; border-radius: 6px; margin-top: 25px; margin-bottom: 25px;">
+                            <strong style="color: var(--text-primary); font-size: 1.05rem;">Remember:</strong> <span style="color: var(--text-secondary);">Week 1 is about learning your rhythm, not perfection. It's okay if you don't hit 100%!</span>
+                        </div>
+
+                        <button onclick="toggleGuide(4)" style="margin-top: 5px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+
+                <div id="guide-5" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>📈 Advanced Progress Tracking</h3>
+                        <p style="margin-bottom: 20px;">Level up your productivity with advanced Tenths features.</p>
+                        
+                        <h4>1. Using Categories & Filters</h4>
+                        <p style="margin-bottom: 10px;">Organize tasks by area:</p>
+                        <ul>
+                            <li><strong>Academic:</strong> All study/learning tasks</li>
+                            <li><strong>Professional:</strong> Work projects and deadlines</li>
+                            <li><strong>Personal:</strong> Health, hobbies, self-improvement</li>
+                            <li><strong>Financial:</strong> Budgeting, spending tracking</li>
+                        </ul>
+
+                        <h4>2. Custom Metrics</h4>
+                        <p style="margin-bottom: 10px;">Don't limit yourself to chapters/hours. Try:</p>
+                        <ul>
+                            <li>Miles (running goal)</li>
+                            <li>Words (writing project)</li>
+                            <li>Dollars (savings goal)</li>
+                            <li>Servings (meal prep)</li>
+                            <li>Days (streak counter)</li>
+                        </ul>
+
+                        <h4>3. Parallel Task Tracking</h4>
+                        <p style="margin-bottom: 10px;">Track multiple projects simultaneously:</p>
+                        <ul>
+                            <li>Create a "master goal" task</li>
+                            <li>Create sub-tasks for each component</li>
+                            <li>The dashboard shows progress on all of them</li>
+                            <li>See which areas need attention</li>
+                        </ul>
+
+                        <h4>4. Analyzing Your Data</h4>
+                        <p style="margin-bottom: 10px;">Use analytics to answer:</p>
+                        <ul>
+                            <li>Which category takes up most of my time?</li>
+                            <li>What's my realistic pace per day?</li>
+                            <li>When do I procrastinate most?</li>
+                            <li>Which deadlines do I consistently miss?</li>
+                            <li>Am I getting better week over week?</li>
+                        </ul>
+
+                        <h4>5. Setting Stretch Goals</h4>
+                        <p style="margin-bottom: 10px;">Once comfortable with basics:</p>
+                        <ol>
+                            <li>Identify your baseline (what you consistently do)</li>
+                            <li>Set a stretch goal (10-20% higher)</li>
+                            <li>Track if you can sustain it</li>
+                            <li>If yes, make it your new baseline</li>
+                            <li>Set a new stretch goal</li>
+                        </ol>
+
+                        <div style="background: var(--bg-primary); border-left: 4px solid var(--accent-color); padding: 20px; border-radius: 6px; margin-top: 25px; margin-bottom: 25px;">
+                            <strong style="color: var(--text-primary); font-size: 1.05rem;">Advanced Tip:</strong> <span style="color: var(--text-secondary);">Export your data monthly and analyze trends. Over time, you'll see how consistent practice builds exponential progress!</span>
+                        </div>
+                        
+                        <button onclick="toggleGuide(5)" style="margin-top: 5px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+
+                <div id="guide-6" class="guide-content" style="display: none;">
+                    <div class="guide-detail">
+                        <h3>🔒 Privacy & Security Settings</h3>
+                        <p style="margin-bottom: 20px;">Protect your account and understand your privacy options.</p>
+                        
+                        <h4>1. Password Security</h4>
+                        <ul>
+                            <li>Use a strong password (12+ characters, mix of letters/numbers/symbols)</li>
+                            <li>Don't share your password with anyone</li>
+                            <li>Use a unique password (don't reuse across apps)</li>
+                            <li>Change your password every 3 months</li>
+                            <li>Enable two-factor authentication (2FA) for extra security</li>
+                        </ul>
+                        
+                        <h4>2. Two-Factor Authentication (2FA)</h4>
+                        <p style="font-weight: 600; margin-bottom: 10px;">How to enable:</p>
+                        <ol>
+                            <li>Go to Settings → Security</li>
+                            <li>Toggle "Two-Factor Authentication"</li>
+                            <li>Follow the on-screen instructions</li>
+                        </ol>
+                        
+                        <button onclick="toggleGuide(6)" style="margin-top: 20px; padding: 12px 24px; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent-color)'">Close Guide</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT FORM RESTORED EXACLTY -->
+            <section class="help-section">
+                <h2>Get in Touch</h2>
+                <div class="contact-section">
+                    <h3>We're Here to Help</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Can't find the answer you're looking for? Contact us directly and we'll help within 24 hours.</p>
+                    
+                    <form id="support-form" class="support-form">
+                        <div class="support-form-row">
+                            <div class="support-group">
+                                <label for="support-name">YOUR NAME</label>
+                                <input type="text" id="support-name" placeholder="Name" required>
+                            </div>
+                            <div class="support-group">
+                                <label for="support-email">EMAIL ADDRESS</label>
+                                <input type="email" id="support-email" placeholder="Email" required>
+                            </div>
+                        </div>
+
+                        <div class="support-group" style="margin-top: 20px;">
+                            <label for="support-type">SUPPORT TYPE</label>
+                            <div class="support-type-selector">
+                                <label class="support-radio">
+                                    <input type="radio" name="support-type" value="general" checked>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span class="radio-label">💬 General Support</span>
+                                        <span class="radio-info">Account issues, general questions</span>
+                                    </div>
+                                </label>
+                                <label class="support-radio">
+                                    <input type="radio" name="support-type" value="bug">
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span class="radio-label">🐛 Bug Report</span>
+                                        <span class="radio-info">App crashes, errors, issues</span>
+                                    </div>
+                                </label>
+                                <label class="support-radio">
+                                    <input type="radio" name="support-type" value="security">
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span class="radio-label">🔒 Security Issue</span>
+                                        <span class="radio-info">Account safety, privacy concerns</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="support-group" style="margin-top: 20px;">
+                            <label for="support-message">YOUR MESSAGE</label>
+                            <textarea id="support-message" placeholder="Tell us what you need help with..." rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" id="support-submit" class="support-btn-submit" style="margin-top: 20px;">Send Support Request</button>
+                    </form>
+                </div>
+            </section>
+            
+            <div style="height: 100px;"></div>
+
+            <!-- Sanctuary Footer (Global Standard) -->
+            <footer class="footer" style="padding-top: 4rem; background: transparent; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 80px;">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <div class="footer-logo">Tenth's</div>
+                        <p class="footer-desc">No clutter. No confusion. Just a clean, gorgeous interface that makes tracking progress feel effortless and satisfying.<br>Built for people who want results</p>
+                        <p class="footer-copy">@2026 Tenth's Task Tracker</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>COMPANY</h4>
+                            <a href="about.html">About Us</a>
+                            <a href="about.html#contact">Contact Us</a>
+                            <a href="about.html#terms">Terms of Service</a>
+                            <a href="help.html">Privacy Policy</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-newsletter">
+                        <h4>NEWSLETTER</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">📷</a>
+                            <a href="#" class="social-icon">❤️</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Reusable Premium Modal (The Commitment Check) -->
+    <div id="confirm-modal" class="premium-modal-overlay" style="display: none;">
+        <div class="premium-modal-content">
+            <div class="pm-icon" id="modal-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6C5248" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h2 id="modal-title">Wait...</h2>
+            <p id="modal-message">Maybe you are a "quitter"?</p>
+            <div class="pm-actions">
+                <button id="modal-cancel" class="pm-btn pm-btn-keep">No, Let's Keep Going</button>
+                <button id="modal-confirm" class="pm-btn pm-btn-quit">Yes, I Quit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('open');
+            });
+        });
+        
+        function toggleGuide(guideId) {
+            const guideElement = document.getElementById('guide-' + guideId);
+            if (!guideElement) return;
+            if (guideElement.style.display === 'none') {
+                document.querySelectorAll('[id^="guide-"]').forEach(guide => {
+                    guide.style.display = 'none';
+                });
+                guideElement.style.display = 'block';
+                setTimeout(() => {
+                    guideElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                guideElement.style.display = 'none';
+            }
+        }
+        
+        document.getElementById('support-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = document.getElementById('support-form');
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = `
+                background: #e8f5e9;
+                color: #2e7d32;
+                padding: 16px;
+                border-radius: 8px;
+                margin-top: 16px;
+                text-align: center;
+                font-weight: 600;
+                border: 1px solid #c8e6c9;
+            `;
+            successMsg.textContent = '✓ Thank you! We\'ve received your message. We\'ll get back to you soon.';
+            form.style.display = 'none';
+            form.parentElement.appendChild(successMsg);
+        });
+
+        // Premium Logout Modal Logic (Sanctuary Standard)
+        const logoutBtn = document.getElementById('logout-btn');
+        const confirmModal = document.getElementById('confirm-modal');
+        const modalCancel = document.getElementById('modal-cancel');
+        const modalConfirm = document.getElementById('modal-confirm');
+
+        if (logoutBtn && confirmModal) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                confirmModal.style.display = 'flex';
+            });
+
+            modalCancel.addEventListener('click', () => {
+                confirmModal.style.display = 'none';
+            });
+
+            modalConfirm.addEventListener('click', () => {
+                window.location.href = 'api/logout.php';
+            });
+
+            // Close on outside click
+            confirmModal.addEventListener('click', (e) => {
+                if (e.target === confirmModal) confirmModal.style.display = 'none';
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('api/dashboard.php');
+                const result = await response.json();
+                if (result.status === 'success') {
+                    document.getElementById('nav-name').textContent = result.data.user.name;
+                    document.getElementById('nav-avatar').textContent = result.data.user.name.charAt(0).toUpperCase();
+                } else {
+                    if(result.message === 'Unauthorized') {
+                        window.location.href = 'index.html'; 
+                    }
+                }
+            } catch (err) {}
+        });
+    </script>
+</body>
+</html>

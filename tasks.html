@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenth's - Tasks</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="tasks.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">Tenth's</div>
+            <div class="user-profile">
+                <div class="avatar" id="nav-avatar">U</div>
+                <div class="user-info">
+                    <div class="user-name" id="nav-name">Loading...</div>
+                </div>
+            </div>
+            <div class="search-bar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Search tasks...">
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    Home
+                </a>
+                <a href="tasks.html" class="nav-item active">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    Tasks
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    Analytics
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Profile
+                </a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a href="help.html" class="nav-sub-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Help</a>
+                <a href="#" class="nav-sub-item" id="logout-btn" style="color: #D34545;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main tasks-main">
+            <!-- Header Section -->
+            <header class="tasks-header">
+                <h1>Tasks</h1>
+                <p>Curating your path to focus and achievement through tactile precision and architectural clarity.</p>
+            </header>
+
+            <!-- Filters & Sorting Row -->
+            <div class="tasks-controls-row">
+                <div class="filter-pills" id="filter-pills">
+                    <button class="pill active" data-filter="ALL">ALL</button>
+                    <button class="pill" data-filter="IN PROGRESS">IN PROGRESS</button>
+                    <button class="pill" data-filter="COMPLETED">COMPLETED</button>
+                    <button class="pill" data-filter="OVERDUE">OVERDUE</button>
+                    <button class="pill" data-filter="ARCHIVED">ARCHIVED</button>
+                </div>
+                
+                <div class="tasks-sort">
+                    <span class="sort-label">SORT BY</span>
+                    <div class="sort-dropdown">
+                        <select id="sort-select">
+                            <option value="deadline">Deadline</option>
+                            <option value="asc">A-Z</option>
+                            <option value="progress">Highest Progress</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Row -->
+            <div class="tasks-actions-bar">
+                <div class="select-all-group">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="select-all">
+                        <span class="checkmark"></span>
+                    </div>
+                    <label for="select-all" class="action-label">SELECT ALL</label>
+                </div>
+                
+                <div class="bulk-actions">
+                    <button class="bulk-btn cancel-btn" id="bulk-delete" disabled>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        DELETE
+                    </button>
+                    <button class="bulk-btn" id="bulk-archive" disabled>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                        ARCHIVE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tasks Masonry Grid -->
+            <div class="tasks-grid" id="tasks-grid">
+                <!-- Javascript will inject task cards here -->
+            </div>
+
+            <div id="empty-state" class="empty-state">
+                No tasks found matching this criteria.
+            </div>
+
+            <!-- Dashboard Footer (Sanctuary-Slim Style) -->
+            <footer class="footer" style="padding-top: 4rem; background: transparent; border-top: 1px solid rgba(0,0,0,0.05);">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <div class="footer-logo">Tenth's</div>
+                        <p class="footer-desc">No clutter. No confusion. Just a clean, gorgeous interface that makes tracking progress feel effortless and satisfying.<br>Built for people who want results</p>
+                        <p class="footer-copy">@2026 Tenth's Task Tracker</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>COMPANY</h4>
+                            <a href="about.html">About Us</a>
+                            <a href="about.html#contact">Contact Us</a>
+                            <a href="about.html#terms">Terms of Service</a>
+                            <a href="help.html">Privacy Policy</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-newsletter">
+                        <h4>NEWSLETTER</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">📷</a>
+                            <a href="#" class="social-icon">❤️</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            
+            <!-- Global Floating FAB mimicking dashboard style -->
+            <button onclick="window.location.href='create-task.html'" class="fab-new-task" title="Create New Task">+</button>
+
+        </main>
+    </div>
+
+    <!-- Reusable Premium Modal (The Commitment Check) -->
+    <div id="confirm-modal" class="premium-modal-overlay" style="display: none;">
+        <div class="premium-modal-content">
+            <div class="pm-icon" id="modal-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6C5248" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h2 id="modal-title">Wait...</h2>
+            <p id="modal-message">Maybe you are a "quitter"?</p>
+            <div class="pm-actions">
+                <button id="modal-cancel" class="pm-btn pm-btn-keep">No, Let's Keep Going</button>
+                <button id="modal-confirm" class="pm-btn pm-btn-quit">Yes, I Quit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="notifications.js"></script>
+    <script src="tasks.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

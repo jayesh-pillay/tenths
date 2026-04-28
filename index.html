@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenth's - Productivity Starts Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google Identity Services Architecture Core -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">Tenth's</div>
+            <div class="header-right">
+                <span class="login-text">Already have an account?</span>
+                <a href="login.html" class="btn btn-primary btn-login">Login</a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Side: Copy & Features -->
+            <section class="hero-section">
+                <h1 class="hero-title">Stop Dreaming.<br> <span class="highlight">Start Achieving.
+</span><br>Focus With Tenth's.</h1>
+                <p class="hero-subtitle">
+                    Tenth's transforms how you tackle your goals. With AI-powered motivation, smart tracking, and real-time insights, you'll finally break through the noise and build momentum that lasts.
+
+
+                </p>
+
+                <div class="features-container">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡️</div>
+                        <h3 class="feature-title">Breakdown Your Goals</h3>
+                        <p class="feature-desc">Break massive tasks into manageable chunks. Set min and max targets for each section and crush them one by one.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Real-Time Progresse</h3>
+                        <p class="feature-desc">Watch your momentum build with live metrics. Know exactly what you need to do each day and how you're tracking against your targets.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Sign up form -->
+            <section class="form-section">
+                <div class="signup-card">
+                    <h2 class="card-title">Inconsistent Join Us.</h2>
+                    <p class="card-subtitle">Create your Tenth's account today.</p>
+
+                    <form id="signup-form">
+                        <div class="input-group">
+                            <label for="username">USERNAME</label>
+                            <input type="text" id="username" placeholder="JohnDoe" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="email">EMAIL ADDRESS</label>
+                            <input type="email" id="email" placeholder="name@company.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="password">PASSWORD</label>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            
+                            <div class="strength-meter-container">
+                                <div class="strength-bar-bg">
+                                    <div class="strength-bar-fill" id="strength-fill"></div>
+                                </div>
+                                <div class="strength-text" id="strength-text">STRENGTH: STRONG</div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="confirm-password">CONFIRM PASSWORD</label>
+                            <input type="password" id="confirm-password" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit" style="width: 100%; display: block; margin-bottom: 0;">Sign Up</button>
+
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+
+                        <!-- Formal GIS Implementation Wrapper -->
+                        <div id="g_id_onload"
+                             data-client_id="672579644819-ndrlhomkhnd7dgpge3e5lsbhrjsno2gd.apps.googleusercontent.com"
+                             data-context="signup"
+                             data-ux_mode="popup"
+                             data-callback="handleCredentialResponse"
+                             data-auto_prompt="false">
+                        </div>
+
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="continue_with"
+                             data-size="large"
+                             data-logo_alignment="center"
+                             data-width="100%">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">Tenth's</div>
+                <p class="footer-desc">No clutter. No confusion. Just a clean, gorgeous interface that makes tracking progress feel effortless and satisfying.<br>Built for people who want results</p>
+                <p class="footer-copy">@2026 Tenth's Task Tracker</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>COMPANY</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="about.html#contact">Contact Us</a>
+                    <a href="about.html#terms">Terms of Service</a>
+                    <a href="help.html">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>NEWSLETTER</h4>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="newsletter-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">❤️</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

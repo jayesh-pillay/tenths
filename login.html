@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenth's - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Identity Services Architecture Core -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header snapped to grid for perfect vertical alignment -->
+        <header class="header">
+            <div class="logo">Tenth's</div>
+            <div class="header-right">
+                <span class="login-text">Don't have an account?</span>
+                <a href="index.html" class="btn btn-primary btn-login">Sign Up</a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Side: Welcome Hero -->
+            <section class="hero-section">
+                <h1 class="hero-title">Welcome Back to<br> <span class="highlight">Your Focus</span>.</h1>
+                <p class="hero-subtitle">
+                    Ready to pick up where you left off? Dive back into your Tenth's sanctuary and continue transforming your goals into reality.
+                </p>
+
+                <div class="features-container">
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Real-Time Progress</h3>
+                        <p class="feature-desc">Your metrics are updated and waiting. See exactly how far you've come.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h3 class="feature-title">Stay Motivated</h3>
+                        <p class="feature-desc">Our smart engine has new insights tailored to your current trajectory.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3 class="feature-title">Build Momentum</h3>
+                        <p class="feature-desc">Consistency is the secret. Log in to keep your streak alive today.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Login form -->
+            <section class="form-section">
+                <div class="signup-card">
+                    <h2 class="card-title">Welcome back</h2>
+                    <p class="card-subtitle">Login to your Tenth's account.</p>
+
+                    <form id="login-form">
+                        <div class="input-group">
+                            <label for="email">EMAIL ADDRESS</label>
+                            <input type="email" id="email" placeholder="jayeshpillay@gmail.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <label for="password">PASSWORD</label>
+                                <a href="forgot-password.html" style="font-size: 0.75rem; color: #775A50; text-decoration: none; margin-bottom: 0.5rem;">Forgot Password?</a>
+                            </div>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+                        <div id="login-error" style="color: #C25450; font-size: 0.85rem; display: none; margin-bottom: 1.5rem;"></div>
+
+                        <button type="submit" class="btn btn-primary btn-submit">Login</button>
+
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+
+                        <!-- Formal GIS Implementation Wrapper -->
+                        <div id="g_id_onload"
+                             data-client_id="672579644819-ndrlhomkhnd7dgpge3e5lsbhrjsno2gd.apps.googleusercontent.com"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleCredentialResponse"
+                             data-auto_prompt="false">
+                        </div>
+
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="continue_with"
+                             data-size="large"
+                             data-logo_alignment="center"
+                             data-width="100%">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">Tenth's</div>
+                <p class="footer-desc">No clutter. No confusion. Just a clean, gorgeous interface that makes tracking progress feel effortless and satisfying.<br>Built for people who want results</p>
+                <p class="footer-copy">@2026 Tenth's Task Tracker</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>COMPANY</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="about.html#contact">Contact Us</a>
+                    <a href="about.html#terms">Terms of Service</a>
+                    <a href="help.html">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-newsletter">
+                <h4>NEWSLETTER</h4>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="newsletter-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">❤️</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const errorDiv = document.getElementById('login-error');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const originalText = btn.textContent;
+            btn.textContent = 'Logging in...';
+            btn.style.opacity = '0.8';
+            errorDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('api/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                if (data.status === 'success') {
+                    btn.textContent = 'Welcome back!';
+                    btn.style.backgroundColor = '#6A9B7E';
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 500);
+                } else {
+                    throw new Error(data.message || 'Login failed');
+                }
+            } catch (err) {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '';
+                btn.style.opacity = '1';
+                errorDiv.textContent = err.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Globally exposed Javascript callback required by Google Identity Services
+        window.handleCredentialResponse = async (response) => {
+            const errorDiv = document.getElementById('login-error');
+            try {
+                const fetchResp = await fetch('api/google-auth.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: response.credential })
+                });
+                
+                const data = await fetchResp.json();
+                if (data.status === 'success') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch(err) {
+                errorDiv.textContent = err.message || 'Google Auth Synchronization Failed.';
+                errorDiv.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>

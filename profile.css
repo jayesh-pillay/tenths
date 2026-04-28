@@ -1,0 +1,380 @@
+/* profile.css */
+
+.profile-main {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.prof-header {
+    margin-bottom: 40px;
+}
+
+.prof-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111;
+    letter-spacing: -0.01em;
+    margin-bottom: 5px;
+}
+
+.prof-header p {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+/* Layout Grid */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 1024px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Base Card Style */
+.prof-card {
+    background: #FFF;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #EBEBEB;
+    margin-bottom: 20px;
+}
+
+.card-header.border-none {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.card-header.pb-20 {
+    padding-bottom: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.flex-align {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.flex-bw {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+
+/* Buttons & Links */
+.btn-link {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #775A50;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.btn-link:hover { opacity: 0.7; }
+
+.btn-primary-muted {
+    background: #EAE6E4;
+    color: #5A4740;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-primary-muted:hover { background: #E0DDD9; }
+
+/* Profile Avatar Custom Look */
+.card-header .prof-avatar-block {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.prof-avatar-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prof-info-actions {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+}
+
+/* Forms */
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .form-row { flex-direction: column; }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.flex-1 {
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.form-hint {
+    font-size: 0.65rem;
+    color: #775A50;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.prof-input {
+    background: #F8F8F8;
+    border: 1px solid transparent;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.prof-input:focus {
+    outline: none;
+    background: #FFF;
+    border-color: #DDD;
+}
+
+/* Custom CSS Toggles matching Mockup */
+.notif-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.notif-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+.notif-row.hide-border {
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+
+.notif-text h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+}
+
+.notif-text p {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #888;
+}
+
+.custom-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.custom-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #E2E2E2;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+input:checked + .slider {
+    background-color: #775A50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Appearance Toggles */
+.appearance-toggles {
+    display: flex;
+    gap: 15px;
+}
+
+.app-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 25px 0;
+    border-radius: 16px;
+    border: none;
+    background: #F4F4F4;
+    color: #888;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.app-btn span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.app-btn.active {
+    background: #EAE6E4;
+    color: #111;
+}
+
+/* Focus Time Card - The brown widget */
+.focus-card {
+    background: #775A50;
+    color: #FFF;
+    border-radius: 20px;
+}
+
+.fc-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.fc-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #FFF;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.fc-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.fc-fill {
+    height: 100%;
+    background: #FFF;
+    border-radius: 5px;
+    transition: width 1s ease-out;
+}
+
+.fc-desc {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Danger Zone Card */
+.danger-card {
+    background: #FAFAFA; /* Light off-white */
+    border: 1px solid #FCE8E8;
+}
+
+.text-danger {
+    color: #D34545 !important;
+}
+
+.danger-desc {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    border: 1px solid #F4C4C4;
+    color: #D34545;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-danger-outline:hover {
+    background: #FFF1F1;
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenth's - Task Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="task-view.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">Tenth's</div>
+            
+            <div class="user-profile">
+                <!-- Avatar placeholder -->
+                <div class="avatar" id="nav-avatar">U</div>
+                <div class="user-info">
+                    <div class="user-name" id="nav-name">jayeshpillay</div>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Search tasks...">
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Home
+                </a>
+                <a href="tasks.html" class="nav-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                    Tasks
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    Analytics
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Profile
+                </a>
+                </nav>
+
+
+            <div class="sidebar-bottom">
+                <a href="help.html" class="nav-sub-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Help</a>
+                <a href="#" id="logout-btn" class="nav-sub-item logout"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main" style="padding: 40px;">
+            <div id="error-container" style="color:red; font-weight:bold; display:none;"></div>
+            
+            <div id="content-container" style="display:none;">
+                <div class="tv-header-row">
+                    <div class="tv-breadcrumbs">TASKS <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg> TASK DETAIL</div>
+                    
+                    <div class="tv-title-row">
+                        <h1 class="tv-title" id="task-title">Loading...</h1>
+                        
+                        <div class="tv-actions">
+                            <button class="tv-action-btn" id="edit-task-btn" title="Edit Task"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+                            <div class="overall-progress-text" style="margin-left: 20px;">
+                                <p class="op-pct" id="top-overall-pct">0%</p>
+                                <span class="op-label">OVERALL PROGRESS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tv-badges">
+                        <div class="tv-badge-group">
+                            <div class="tv-badge" style="color: #c25450;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span id="badge-days">0 DAYS REMAINING</span>
+                            </div>
+                            <div class="tv-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                <span id="badge-status">ON TRACK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Layout top section -->
+                <div class="tv-grid">
+                    
+                    <!-- Performance Overview -->
+                    <div class="tv-card" style="grid-row: span 2; display: flex; flex-direction: column; justify-content: center;">
+                        <div class="perf-header">
+                            <div>
+                                <h3>Performance Overview</h3>
+                                <p class="subtitle">Comparative progress across all modules</p>
+                            </div>
+                            <div class="perf-toggle">
+                                <button class="pt-btn active" id="toggle-bar">BAR GRAPH</button>
+                                <button class="pt-btn" id="toggle-pie">PIE CHART</button>
+                            </div>
+                        </div>
+                        
+                        <div class="breakdown-list" id="dom-breakdown-list">
+                            <!-- JS injects bar graphs here -->
+                        </div>
+
+                        <div class="perf-pie" id="dom-perf-pie" style="display:none; justify-content:center; align-items:center; margin-top:20px;">
+                            <div id="perf-pie-ring" style="width: 400px; height: 400px; position:relative;">
+                                <!-- SVG Sunburst Injected Here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic Legend Area -->
+                        <div style="display:flex; gap:25px; margin-top:50px; flex-wrap:wrap; justify-content:center;" id="perf-legend">
+                            <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem; font-weight:700; color:#555;"><div style="width:12px; height:12px; border-radius:50%; background:#8b6d61;"></div> COMPLETED</div>
+                            <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem; font-weight:700; color:#555;"><div style="width:12px; height:12px; border-radius:50%; background:#f0eee9;"></div> REMAINING</div>
+                        </div>
+                    </div>
+
+                    <!-- Focus Metric pie ring -->
+                    <div class="tv-card brown">
+                        <span class="focus-metric-title">Focus Metric</span>
+                        
+                        <div class="progress-ring-container">
+                            <div class="progress-ring" id="dom-progress-ring">
+                                <div class="progress-ring-inner">
+                                    <p class="pr-pct" id="card-overall-pct">0%</p>
+                                    <span class="pr-label">COMPLETED</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="focus-motivation" id="dom-motivation">"Analyzing..."</p>
+                    </div>
+
+                    <!-- Detailed Analytics Card -->
+                    <div class="tv-card da-card">
+                        <span class="da-title">DETAILED ANALYTICS</span>
+                        
+                        <div class="da-item">
+                            <div class="da-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+                            <div class="da-content">
+                                <span class="da-label">DAYS REMAINING</span>
+                                <span class="da-value" id="da-days">--</span>
+                            </div>
+                        </div>
+
+                        <div class="da-item">
+                            <div class="da-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                            <div class="da-content">
+                                <span class="da-label">REQUIRED DAILY PROGRESS</span>
+                                <span class="da-value" id="da-req-pace">--</span>
+                            </div>
+                        </div>
+
+                        <div class="da-item">
+                            <div class="da-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                            <div class="da-content">
+                                <span class="da-label">CURRENT PACE</span>
+                                <span class="da-value" id="da-cur-pace" style="color: #6C5248;">--</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini progress bar -->
+                        <div style="margin-top: 10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span style="font-size:0.6rem; font-weight:700; color:#111;">GOAL CONFIDENCE</span>
+                                <span style="font-size:0.6rem; font-weight:700; color:#888;" id="da-confidence">--</span>
+                            </div>
+                            <div style="width:100%; height:4px; background:#f0eee9; border-radius:2px;"><div id="da-conf-bar" style="width:0%; height:100%; background:#8b6d61; border-radius:2px;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Updating Cards for Breakdowns -->
+                <div class="tv-interactive-grid" id="interactive-grid">
+                    <!-- JS injects cards dynamically here -->
+                </div>
+
+            </div>
+
+            <div style="height: 100px;"></div> <!-- visual padding -->
+
+            <!-- Sanctuary Footer (Global Standard) -->
+            <footer class="footer" style="padding-top: 4rem; background: transparent; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 80px;">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <div class="footer-logo">Tenth's</div>
+                        <p class="footer-desc">No clutter. No confusion. Just a clean, gorgeous interface that makes tracking progress feel effortless and satisfying.<br>Built for people who want results</p>
+                        <p class="footer-copy">@2026 Tenth's Task Tracker</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>COMPANY</h4>
+                            <a href="about.html">About Us</a>
+                            <a href="about.html#contact">Contact Us</a>
+                            <a href="about.html#terms">Terms of Service</a>
+                            <a href="help.html">Privacy Policy</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-newsletter">
+                        <h4>NEWSLETTER</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">📷</a>
+                            <a href="#" class="social-icon">❤️</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Reusable Premium Modal (The Commitment Check) -->
+    <div id="confirm-modal" class="premium-modal-overlay" style="display: none;">
+        <div class="premium-modal-content">
+            <div class="pm-icon" id="modal-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6C5248" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h2 id="modal-title">Wait...</h2>
+            <p id="modal-message">Maybe you are a "quitter"?</p>
+            <div class="pm-actions">
+                <button id="modal-cancel" class="pm-btn pm-btn-keep">No, Let's Keep Going</button>
+                <button id="modal-confirm" class="pm-btn pm-btn-quit">Yes, I Quit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="notifications.js"></script>
+    <script src="task-view.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
