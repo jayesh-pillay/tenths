@@ -76,4 +76,42 @@ function executeBrevoAPI($toEmail, $toName, $subject, $htmlBody) {
         return false;
     }
 }
+
+/**
+ * Pseudo-Cron hook to dispatch approaching deadline emails
+ */
+function processApproachingDeadlines() {
+    global $pdo;
+    
+    try {
+        $stmt = $pdo->prepare("
+            SELECT t.*, u.email, u.username, u.notif_email_summary 
+            FROM tasks t 
+            JOIN users u ON t.user_id = u.id 
+            WHERE t.status != 'completed' 
+              AND t.deadline_reminded = 0 
+              AND t.due_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 2 DAY)
+              AND u.notif_email_summary = 1
+        ");
+        $stmt->execute();
+        $tasks = $stmt->fetchAll();
+        
+        foreach ($tasks as $task) {
+            $toEmail = $task['email'];
+            $toName = $task['username'];
+            $taskTitle = htmlspecialchars($task['title']);
+            $dueDate = $task['due_date'];
+            
+            $subject = "Tenth's Alert: Approaching Deadline for {$taskTitle}";
+            $htmlBody = "<h2>Approaching Deadline</h2><p>Hello {$toName}, your task <strong>{$taskTitle}</strong> is due on {$dueDate}. Let's get it done!</p>";
+            
+            if (executeBrevoAPI($toEmail, $toName, $subject, $htmlBody)) {
+                $updateStmt = $pdo->prepare("UPDATE tasks SET deadline_reminded = 1 WHERE id = ?");
+                $updateStmt->execute([$task['id']]);
+            }
+        }
+    } catch (\Exception $e) {
+        // Silently fail for pseudo-cron
+    }
+}
 ?>
