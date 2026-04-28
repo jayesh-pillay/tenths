@@ -1,24 +1,12 @@
 <?php
 require_once __DIR__ . '/db.php';
 
-// Load PHPMailer via the Composer Autoloader
-// Note: This only works if 'composer install' has run on the server
-$autoload_path = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoload_path)) {
-    require_once $autoload_path;
-}
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
 /**
- * Dispatch an email notification using PHPMailer (SMTP).
+ * Dispatch an email notification using Brevo API (Firewall-Proof).
  */
 function sendTaskEmail($userId, $eventType, $taskData) {
     global $pdo;
 
-    // 1. Fetch User Data
     $stmt = $pdo->prepare('SELECT username, email, notif_email_summary FROM users WHERE id = ?');
     $stmt->execute([$userId]);
     $user = $stmt->fetch();
@@ -30,14 +18,11 @@ function sendTaskEmail($userId, $eventType, $taskData) {
     $toEmail = $user['email'];
     $toName = $user['username'];
     
-    // 2. Prepare Content (Logic truncated for brevity in this rewrite, but identical to before)
     $taskTitle = htmlspecialchars($taskData['title'] ?? 'Unknown Task');
-    $taskDue = htmlspecialchars($taskData['due_date'] ?? 'No Date Set');
-    
     $subject = "Tenth's Update: {$taskTitle}";
     $htmlBody = "<h2>Task Update</h2><p>Your task <strong>{$taskTitle}</strong> has been {$eventType}.</p>";
 
-    return executePHPMailer($toEmail, $toName, $subject, $htmlBody);
+    return executeBrevoAPI($toEmail, $toName, $subject, $htmlBody);
 }
 
 /**
@@ -46,78 +31,49 @@ function sendTaskEmail($userId, $eventType, $taskData) {
 function sendResetEmail($toEmail, $toName, $resetLink) {
     $subject = "Tenth's - Reset Your Password";
     $htmlBody = "<h2>Reset Your Password</h2><p>Hello {$toName}, click below to reset your password:</p><p><a href='{$resetLink}'>Reset Password</a></p>";
-    return executePHPMailer($toEmail, $toName, $subject, $htmlBody);
+    return executeBrevoAPI($toEmail, $toName, $subject, $htmlBody);
 }
 
 /**
- * Central engine to send mail via SMTP
+ * Central engine to send mail via Brevo HTTP API
+ * This bypasses all SMTP firewalls!
  */
-function executePHPMailer($toEmail, $toName, $subject, $htmlBody) {
-    $mail = new PHPMailer(true);
-
-    try {
-        // --- SMTP CONFIGURATION ---
-        $mail->isSMTP();
-        $mail->SMTPDebug  = 3; 
-        $mail->Debugoutput = 'error_log'; 
-
-        $mail->Host       = 'smtp.googlemail.com'; // Alternative host
-        $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('SMTP_USER'); 
-        $mail->Password   = getenv('SMTP_PASS'); 
-        $mail->Port       = getenv('SMTP_PORT') ?: 465;
-        
-        // SSL Bypass: In case the server has old/broken certificates
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
-
-        if ($mail->Port == 465) {
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        } else {
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        }
-        
-        $mail->Timeout    = 15; // Give it a bit more time for the handshake
-        $mail->SMTPConnectTimeout = 15;
-
-        // Recipients
-        $mail->setFrom(getenv('SMTP_USER'), "Tenth's Sanctuary");
-        $mail->addAddress($toEmail, $toName);
-
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body    = $htmlBody;
-
-        $mail->send();
-        
-        // Log for local debug
-        @file_put_contents(__DIR__ . '/../emails_sent.log', "[SMTP SUCCESS] To: {$toEmail} | Subject: {$subject}\n", FILE_APPEND);
-        return true;
-    } catch (Exception $e) {
-        @file_put_contents(__DIR__ . '/../emails_sent.log', "[SMTP ERROR] " . $mail->ErrorInfo . "\n", FILE_APPEND);
+function executeBrevoAPI($toEmail, $toName, $subject, $htmlBody) {
+    $apiKey = getenv('BREVO_API_KEY');
+    $senderEmail = getenv('SMTP_USER'); // Use your verified Brevo sender email
+    
+    if (!$apiKey) {
+        @file_put_contents(__DIR__ . '/../emails_sent.log', "[BREVO ERROR] Missing BREVO_API_KEY\n", FILE_APPEND);
         return false;
     }
-}
 
-/**
- * Pseudo-Cron Engine to evaluate deadlines.
- */
-function processApproachingDeadlines() {
-    global $pdo;
-    try {
-        $stmt = $pdo->query("SELECT * FROM tasks WHERE deadline_reminded = 0 AND status != 'completed' AND due_date <= DATE_ADD(NOW(), INTERVAL 1 DAY)");
-        $tasks = $stmt->fetchAll();
-        foreach ($tasks as $task) {
-            if (sendTaskEmail($task['user_id'], 'deadline', $task)) {
-                $pdo->prepare('UPDATE tasks SET deadline_reminded = 1 WHERE id = ?')->execute([$task['id']]);
-            }
-        }
-    } catch (\Exception $e) {}
+    $data = [
+        "sender" => ["name" => "Tenth's Sanctuary", "email" => $senderEmail],
+        "to" => [["email" => $toEmail, "name" => $toName]],
+        "subject" => $subject,
+        "htmlContent" => $htmlBody
+    ];
+
+    $ch = curl_init('https://api.brevo.com/v3/smtp/email');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'api-key: ' . $apiKey,
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode >= 200 && $httpCode < 300) {
+        @file_put_contents(__DIR__ . '/../emails_sent.log', "[BREVO SUCCESS] To: {$toEmail} | Resp: {$response}\n", FILE_APPEND);
+        return true;
+    } else {
+        @file_put_contents(__DIR__ . '/../emails_sent.log', "[BREVO ERROR] Code: {$httpCode} | Resp: {$response}\n", FILE_APPEND);
+        return false;
+    }
 }
 ?>
