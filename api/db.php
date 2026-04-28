@@ -45,7 +45,8 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    echo json_encode(["status" => "error", "message" => "Database connection failed! Ensure MySQL is running on localhost with no password for user 'root'."]);
+    $errorDetails = "Database connection failed! Real error: " . $e->getMessage() . " | Host set to: " . $host . " | Database set to: " . $db;
+    echo json_encode(["status" => "error", "message" => $errorDetails]);
     exit;
 }
 ?>
