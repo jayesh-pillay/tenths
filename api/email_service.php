@@ -57,14 +57,19 @@ function executePHPMailer($toEmail, $toName, $subject, $htmlBody) {
 
     try {
         // --- SMTP CONFIGURATION ---
-        // These should be set in Railway Variables for security!
         $mail->isSMTP();
+        $mail->SMTPDebug  = 3; // LOUD MODE: Prints every detail to logs
+        $mail->Debugoutput = 'error_log'; // Send debug info to Railway logs
+
         $mail->Host       = getenv('SMTP_HOST') ?: 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('SMTP_USER'); // Your Gmail
-        $mail->Password   = getenv('SMTP_PASS'); // Your App Password
+        $mail->Username   = getenv('SMTP_USER'); 
+        $mail->Password   = getenv('SMTP_PASS'); 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = getenv('SMTP_PORT') ?: 587;
+        
+        $mail->Timeout    = 10; // FAST MODE: Don't hang forever
+        $mail->SMTPConnectTimeout = 10;
 
         // Recipients
         $mail->setFrom(getenv('SMTP_USER'), "Tenth's Sanctuary");
