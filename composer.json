@@ -1,0 +1,8 @@
+{
+    "name": "jayesh-pillay/tenths",
+    "description": "Tenths Sanctuary App",
+    "type": "project",
+    "require": {
+        "php": "^8.0"
+    }
+}
