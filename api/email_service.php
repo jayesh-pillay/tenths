@@ -65,11 +65,17 @@ function executePHPMailer($toEmail, $toName, $subject, $htmlBody) {
         $mail->SMTPAuth   = true;
         $mail->Username   = getenv('SMTP_USER'); 
         $mail->Password   = getenv('SMTP_PASS'); 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = getenv('SMTP_PORT') ?: 587;
         
-        $mail->Timeout    = 10; // FAST MODE: Don't hang forever
-        $mail->SMTPConnectTimeout = 10;
+        // Auto-switch encryption to SSL if using Port 465 (the secure tunnel)
+        if ($mail->Port == 465) {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        } else {
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        }
+        
+        $mail->Timeout    = 15; // Give it a bit more time for the handshake
+        $mail->SMTPConnectTimeout = 15;
 
         // Recipients
         $mail->setFrom(getenv('SMTP_USER'), "Tenth's Sanctuary");
