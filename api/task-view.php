@@ -131,15 +131,15 @@ if ($curPace < $reqPace && $overallPct < 100) {
 
 $statusBadge = $onTrack ? 'ON TRACK' : 'FALLING BEHIND';
 $diffPct = round($curPace - $reqPace, 1);
-$motivationalStr = "\"You are right on track. Consistent progress pays off.\"";
+$motivationalStr = "You are right on track. Consistent progress pays off.";
 
 if ($overallPct == 100) {
-    $motivationalStr = "\"Excellent work. You have reached 100% completion!\"";
+    $motivationalStr = "Excellent work. You have reached 100% completion!";
 } else if ($diffPct > 0) {
-    $motivationalStr = "\"You are $diffPct% ahead of your required daily pace. Maintain this velocity.\"";
+    $motivationalStr = "You are $diffPct% ahead of your required daily pace. Maintain this velocity.";
 } else if ($diffPct < 0) {
     $absDiff = abs($diffPct);
-    $motivationalStr = "\"You have fallen $absDiff% behind your required daily pace. Let's make it up tomorrow.\"";
+    $motivationalStr = "You have fallen $absDiff% behind your required daily pace. Let's make it up tomorrow.";
 }
 
 echo json_encode([

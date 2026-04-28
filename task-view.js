@@ -326,105 +326,108 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         const renderSunburst = () => {
-            if (totalAllTargets === 0) return;
-
-            // 1. Pre-calculate angles with a MINIMUM width for small slices (High Visibility)
-            let adjustedBreakdowns = breakdowns.map(b => {
-                let RawAngle = (b.target_int / totalAllTargets) * 360;
-                return { ...b, rawAngle: RawAngle };
-            });
-
-            // Ensure every slice has at least 25 degrees so labels never clump
-            const minAngleRequirement = 25;
-            let totalAdjustedAngle = 0;
-            adjustedBreakdowns.forEach(b => {
-                b.angle = Math.max(b.rawAngle, minAngleRequirement);
-                totalAdjustedAngle += b.angle;
-            });
-
-            // Rescale back to 360 to keep it a full circle
-            adjustedBreakdowns.forEach(b => {
-                b.angle = (b.angle / totalAdjustedAngle) * 360;
-            });
-
-            let currentAngle = -90; // Start at 12 o'clock
             const centerX = 200;
             const centerY = 200;
             const innerRadius = 75;
             const maxOuterRadius = 175;
             
-            let svgContent = `<svg viewBox="0 0 400 400" style="width:100%; height:100%;">
-                <defs>
-            `;
+            let svgContent = `<svg viewBox="0 0 400 400" style="width:100%; height:100%;">`;
 
-            // 1. Generate text paths
-            adjustedBreakdowns.forEach((b, i) => {
-                const sliceAngle = b.angle;
-                const midAngle = (currentAngle + (sliceAngle / 2) + 360) % 360;
-                const textPathRadius = 125;
+            if (totalAllTargets === 0) {
+                // Render an empty gray track if no breakdowns
+                svgContent += `<circle cx="${centerX}" cy="${centerY}" r="${innerRadius + (maxOuterRadius - innerRadius)/2}" fill="none" stroke="#eee" stroke-width="${maxOuterRadius - innerRadius}" />`;
+            } else {
+                svgContent += `<defs>`;
+                // 1. Pre-calculate angles with a MINIMUM width for small slices (High Visibility)
+                let adjustedBreakdowns = breakdowns.map(b => {
+                    let RawAngle = (b.target_int / totalAllTargets) * 360;
+                    return { ...b, rawAngle: RawAngle };
+                });
 
-                const needsFlip = (midAngle > 90 && midAngle < 270);
-                let startA = currentAngle;
-                let endA = currentAngle + sliceAngle;
+                // Ensure every slice has at least 25 degrees so labels never clump
+                const minAngleRequirement = 25;
+                let totalAdjustedAngle = 0;
+                adjustedBreakdowns.forEach(b => {
+                    b.angle = Math.max(b.rawAngle, minAngleRequirement);
+                    totalAdjustedAngle += b.angle;
+                });
 
-                if (needsFlip) {
-                    const startRad = (endA * Math.PI) / 180;
-                    const endRad = (startA * Math.PI) / 180;
-                    svgContent += `<path id="tp-${i}" d="M ${centerX + textPathRadius * Math.cos(startRad)} ${centerY + textPathRadius * Math.sin(startRad)} A ${textPathRadius} ${textPathRadius} 0 0 0 ${centerX + textPathRadius * Math.cos(endRad)} ${centerY + textPathRadius * Math.sin(endRad)}" />`;
-                } else {
-                    const startRad = (startA * Math.PI) / 180;
-                    const endRad = (endA * Math.PI) / 180;
-                    svgContent += `<path id="tp-${i}" d="M ${centerX + textPathRadius * Math.cos(startRad)} ${centerY + textPathRadius * Math.sin(startRad)} A ${textPathRadius} ${textPathRadius} 0 0 1 ${centerX + textPathRadius * Math.cos(endRad)} ${centerY + textPathRadius * Math.sin(endRad)}" />`;
-                }
-                currentAngle += sliceAngle;
-            });
+                // Rescale back to 360 to keep it a full circle
+                adjustedBreakdowns.forEach(b => {
+                    b.angle = (b.angle / totalAdjustedAngle) * 360;
+                });
 
-            svgContent += `</defs>`;
-            
-            // 2. Draw segments
-            currentAngle = -90;
-            adjustedBreakdowns.forEach((b, i) => {
-                const sliceAngle = b.angle;
-                const color = earthPalette[i % earthPalette.length];
+                let currentAngle = -90; // Start at 12 o'clock
                 
-                let visualPct = b.pct / 100;
-                if (visualPct > 0 && visualPct < 0.15) visualPct = 0.15; // Visibility Boost
+                // 1. Generate text paths
+                adjustedBreakdowns.forEach((b, i) => {
+                    const sliceAngle = b.angle;
+                    const midAngle = (currentAngle + (sliceAngle / 2) + 360) % 360;
+                    const textPathRadius = 125;
 
-                const startRad = (currentAngle * Math.PI) / 180;
-                const endRad = ((currentAngle + sliceAngle) * Math.PI) / 180;
+                    const needsFlip = (midAngle > 90 && midAngle < 270);
+                    let startA = currentAngle;
+                    let endA = currentAngle + sliceAngle;
+
+                    if (needsFlip) {
+                        const startRad = (endA * Math.PI) / 180;
+                        const endRad = (startA * Math.PI) / 180;
+                        svgContent += `<path id="tp-${i}" d="M ${centerX + textPathRadius * Math.cos(startRad)} ${centerY + textPathRadius * Math.sin(startRad)} A ${textPathRadius} ${textPathRadius} 0 0 0 ${centerX + textPathRadius * Math.cos(endRad)} ${centerY + textPathRadius * Math.sin(endRad)}" />`;
+                    } else {
+                        const startRad = (startA * Math.PI) / 180;
+                        const endRad = (endA * Math.PI) / 180;
+                        svgContent += `<path id="tp-${i}" d="M ${centerX + textPathRadius * Math.cos(startRad)} ${centerY + textPathRadius * Math.sin(startRad)} A ${textPathRadius} ${textPathRadius} 0 0 1 ${centerX + textPathRadius * Math.cos(endRad)} ${centerY + textPathRadius * Math.sin(endRad)}" />`;
+                    }
+                    currentAngle += sliceAngle;
+                });
+
+                svgContent += `</defs>`;
                 
-                const drawArc = (rInner, rOuter) => {
-                    const x1 = centerX + rOuter * Math.cos(startRad);
-                    const y1 = centerY + rOuter * Math.sin(startRad);
-                    const x2 = centerX + rOuter * Math.cos(endRad);
-                    const y2 = centerY + rOuter * Math.sin(endRad);
-                    const x3 = centerX + rInner * Math.cos(endRad);
-                    const y3 = centerY + rInner * Math.sin(endRad);
-                    const x4 = centerX + rInner * Math.cos(startRad);
-                    const y4 = centerY + rInner * Math.sin(startRad);
-                    const flags = sliceAngle > 180 ? "1 1" : "0 1";
-                    const flagsRev = sliceAngle > 180 ? "1 0" : "0 0";
-                    return `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${flags} ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 ${flagsRev} ${x4} ${y4} Z`;
-                };
+                // 2. Draw segments
+                currentAngle = -90;
+                adjustedBreakdowns.forEach((b, i) => {
+                    const sliceAngle = b.angle;
+                    const color = earthPalette[i % earthPalette.length];
+                    
+                    let visualPct = b.pct / 100;
+                    if (visualPct > 0 && visualPct < 0.15) visualPct = 0.15; // Visibility Boost
 
-                svgContent += `<path d="${drawArc(innerRadius, maxOuterRadius)}" fill="${color}" fill-opacity="0.1" />`;
-                
-                const pRadius = innerRadius + (maxOuterRadius - innerRadius) * visualPct;
-                if (b.pct > 0) {
-                    svgContent += `<path class="sunburst-slice" data-index="${i}" d="${drawArc(innerRadius, pRadius)}" fill="${color}" stroke="#fff" stroke-width="1.5" style="transition: all 0.3s; cursor:pointer;" />`;
-                }
-                currentAngle += sliceAngle;
-            });
+                    const startRad = (currentAngle * Math.PI) / 180;
+                    const endRad = ((currentAngle + sliceAngle) * Math.PI) / 180;
+                    
+                    const drawArc = (rInner, rOuter) => {
+                        const x1 = centerX + rOuter * Math.cos(startRad);
+                        const y1 = centerY + rOuter * Math.sin(startRad);
+                        const x2 = centerX + rOuter * Math.cos(endRad);
+                        const y2 = centerY + rOuter * Math.sin(endRad);
+                        const x3 = centerX + rInner * Math.cos(endRad);
+                        const y3 = centerY + rInner * Math.sin(endRad);
+                        const x4 = centerX + rInner * Math.cos(startRad);
+                        const y4 = centerY + rInner * Math.sin(startRad);
+                        const flags = sliceAngle > 180 ? "1 1" : "0 1";
+                        const flagsRev = sliceAngle > 180 ? "1 0" : "0 0";
+                        return `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${flags} ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 ${flagsRev} ${x4} ${y4} Z`;
+                    };
 
-            // 3. Draw Labels (On Top Layer)
-            currentAngle = -90;
-            adjustedBreakdowns.forEach((b, i) => {
-                const sliceAngle = b.angle;
-                svgContent += `<text font-size="8" font-weight="700" fill="#333" pointer-events="none" style="text-shadow: 0 0 3px white;">
-                    <textPath href="#tp-${i}" startOffset="50%" text-anchor="middle">${b.title.toUpperCase()}</textPath>
-                </text>`;
-                currentAngle += sliceAngle;
-            });
+                    svgContent += `<path d="${drawArc(innerRadius, maxOuterRadius)}" fill="${color}" fill-opacity="0.1" />`;
+                    
+                    const pRadius = innerRadius + (maxOuterRadius - innerRadius) * visualPct;
+                    if (b.pct > 0) {
+                        svgContent += `<path class="sunburst-slice" data-index="${i}" d="${drawArc(innerRadius, pRadius)}" fill="${color}" stroke="#fff" stroke-width="1.5" style="transition: all 0.3s; cursor:pointer;" />`;
+                    }
+                    currentAngle += sliceAngle;
+                });
+
+                // 3. Draw Labels (On Top Layer)
+                currentAngle = -90;
+                adjustedBreakdowns.forEach((b, i) => {
+                    const sliceAngle = b.angle;
+                    svgContent += `<text font-size="8" font-weight="700" fill="#333" pointer-events="none" style="text-shadow: 0 0 3px white;">
+                        <textPath href="#tp-${i}" startOffset="50%" text-anchor="middle">${b.title.toUpperCase()}</textPath>
+                    </text>`;
+                    currentAngle += sliceAngle;
+                });
+            }
 
             // 4. Center
             svgContent += `
