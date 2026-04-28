@@ -63,26 +63,27 @@ if ($row) {
     $_SESSION['username'] = $finalUsername;
     
     // Inject the mandatory "first-time" generic dashboard item
-    $date = date('Y-m-d', strtotime('+5 days'));
-    $taskSql = "INSERT INTO tasks (user_id, title, description, category, status, progress, due_date, time_left_str) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $date = date('Y-m-d', strtotime('+7 days'));
+    $taskSql = "INSERT INTO tasks (user_id, title, description, measure_type, total_count, category, status, progress, due_date, time_left_str) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $pdo->prepare($taskSql)->execute([
         $userId, 
-        'Your first task', 
-        'BY Tenths team to get in touch complete these tasks', 
-        'OTHERS', 
-        'in_progress', 
+        'Your First Task', 
+        'Lets Get Started', 
+        'Skills', 
+        3, 
+        'Skills', 
+        'pending', 
         0, 
         $date, 
-        '5 DAYS'
+        '7 DAYS'
     ]);
     
     $newTaskId = $pdo->lastInsertId();
-    $breakdownsSql = "INSERT INTO task_breakdowns (task_id, step_index, title, target_val, status) VALUES 
-        (?, 1, 'complete 20 min of workout/yoga dialy', '', 'pending'),
-        (?, 2, 'discover atlest 4 songs daily', '', 'pending'),
-        (?, 3, 'complete atlets 2hrs of study/code or research', '', 'pending'),
-        (?, 4, 'drink water brother', '', 'pending')";
-    $pdo->prepare($breakdownsSql)->execute([$newTaskId, $newTaskId, $newTaskId, $newTaskId]);
+    $breakdownsSql = "INSERT INTO task_breakdowns (task_id, step_index, title, min_target_val, target_val, status) VALUES 
+        (?, 1, 'New Music', '5', '10', 'pending'),
+        (?, 2, 'Pushup', '25', '50', 'pending'),
+        (?, 3, 'Yoga', '20min', '30', 'pending')";
+    $pdo->prepare($breakdownsSql)->execute([$newTaskId, $newTaskId, $newTaskId]);
     
     echo json_encode(["status" => "success", "message" => "Account architected successfully via Google payload."]);
 }
