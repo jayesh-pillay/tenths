@@ -35,9 +35,13 @@ try {
     $host = $_SERVER['HTTP_HOST'];
     $resetLink = "{$protocol}://{$host}/reset-password.html?token={$token}";
     
-    sendResetEmail($email, $user['username'], $resetLink);
+    $sent = sendResetEmail($email, $user['username'], $resetLink);
 
-    echo json_encode(["status" => "success", "message" => "If an account exists for {$email}, a reset link has been sent."]);
+    if ($sent) {
+        echo json_encode(["status" => "success", "message" => "A reset link has been dispatched to {$email}."]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Mail server rejected dispatch. Check logs."]);
+    }
 
 } catch (\Exception $e) {
     echo json_encode(["status" => "error", "message" => "Security engine failed to generate link. Try again."]);
