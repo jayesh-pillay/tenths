@@ -31,7 +31,10 @@ try {
     $stmt->execute([$token, $user['id']]);
 
     // 4. Dispatch Email
-    $resetLink = "http://localhost:8000/reset-password.html?token={$token}";
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $resetLink = "{$protocol}://{$host}/reset-password.html?token={$token}";
+    
     sendResetEmail($email, $user['username'], $resetLink);
 
     echo json_encode(["status" => "success", "message" => "If an account exists for {$email}, a reset link has been sent."]);
