@@ -41,13 +41,6 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    
-    // Auto-migrate min_target_val column if it doesn't exist (prevents deployment issues)
-    try {
-        $pdo->exec("ALTER TABLE task_breakdowns ADD COLUMN min_target_val VARCHAR(100) DEFAULT NULL AFTER title");
-    } catch (\PDOException $e) {
-        // Silently ignore if column already exists or table doesn't exist
-    }
 } catch (\PDOException $e) {
     echo json_encode(["status" => "error", "message" => "Database connection failed!"]);
     exit;
