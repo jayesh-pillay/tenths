@@ -25,8 +25,8 @@ $metricStmt->execute([$user_id]);
 $res = $metricStmt->fetch();
 
 $completedTasks = (int)$res['completed_count'];
-// Math logic to generate a plausible looking demo focus curve
-$focusHours = ($completedTasks * 4) + 12; // Base 12 hrs + 4 per completed
+// Math logic to generate a plausible looking focus curve based on real task completions
+$focusHours = $completedTasks * 4; // 4 hrs per completed task
 $monthlyGoal = 160; 
 $pct = $focusHours > 0 ? min(round(($focusHours / $monthlyGoal) * 100), 100) : 0;
 
