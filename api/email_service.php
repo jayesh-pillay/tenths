@@ -58,16 +58,24 @@ function executePHPMailer($toEmail, $toName, $subject, $htmlBody) {
     try {
         // --- SMTP CONFIGURATION ---
         $mail->isSMTP();
-        $mail->SMTPDebug  = 3; // LOUD MODE: Prints every detail to logs
-        $mail->Debugoutput = 'error_log'; // Send debug info to Railway logs
+        $mail->SMTPDebug  = 3; 
+        $mail->Debugoutput = 'error_log'; 
 
-        $mail->Host       = getenv('SMTP_HOST') ?: 'smtp.gmail.com'; 
+        $mail->Host       = 'smtp.googlemail.com'; // Alternative host
         $mail->SMTPAuth   = true;
         $mail->Username   = getenv('SMTP_USER'); 
         $mail->Password   = getenv('SMTP_PASS'); 
-        $mail->Port       = getenv('SMTP_PORT') ?: 587;
+        $mail->Port       = getenv('SMTP_PORT') ?: 465;
         
-        // Auto-switch encryption to SSL if using Port 465 (the secure tunnel)
+        // SSL Bypass: In case the server has old/broken certificates
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
         if ($mail->Port == 465) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         } else {
